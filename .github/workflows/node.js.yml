@@ -23,6 +23,7 @@ jobs:
         node-version: 14.x
     - run: npm ci --prefix ./UI
     - run: npm install --prefix ./UI
+    - run: npm install -g webpack-dev-server --prefix ./UI 
     
     - uses: actions/upload-artifact@v2
       with:
