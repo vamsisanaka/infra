@@ -23,5 +23,5 @@ jobs:
         node-version: 14.x
     - run: npm install --prefix ./UI
     - run: npm ci --prefix ./UI
-    - run: npm run build --if-present
-    - run: npm test
+    - run: npm run build --if-present ./UI
+    - run: npm test ./UI
