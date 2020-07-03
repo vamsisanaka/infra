@@ -21,7 +21,12 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    - run: npm install --prefix ./UI
     - run: npm ci --prefix ./UI
-    - run: npm run build --if-present ./UI
-    - run: npm test ./UI
+    - run: npm install --prefix ./UI
+    
+    - uses: actions/upload-artifact@v2
+      with:
+        name: buildnode-artifact
+        path: UI
+    
+  
