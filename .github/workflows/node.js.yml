@@ -30,4 +30,15 @@ jobs:
         name: buildnode-artifact
         path: UI
     
-  
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    
+    - name: Build Docker container
+      run: docker build -t prasanna002/nodejs:$GITHUB_RUN_NUMBER -f ./UI/Dockerfile
+    - run: docker login -u ${{ secrets.DOCKER_USER }} 
+             -p ${{ secrets.DOCKER_PASS }}
+    - run: docker push prasanna002/nodejs:$GITHUB_RUN_NUMBER
