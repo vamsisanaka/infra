@@ -43,5 +43,5 @@ jobs:
              -p ${{ secrets.DOCKER_PASS }}
     - run: docker push prasanna002/nodejs
     - name: deploy  to ECS
-      run: chmod 777 deployment.sh
-    - run: ./deployment.sh
+      run: chmod 777 ./UI/deployment.sh
+    - run: ./UI/deployment.sh
