@@ -1,0 +1,7 @@
+FROM node:12
+RUN mkdir UI
+COPY UI/* UI
+RUN cd UI
+EXPOSE 8080
+EXPOSE 8083
+ENTRYPOINT [ "npm", "start" ]
