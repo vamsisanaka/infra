@@ -38,7 +38,10 @@ jobs:
         aws-region: us-east-1
     
     - name: Build Docker container
-      run: docker build -t prasanna002/nodejs:$GITHUB_RUN_NUMBER --file ./UI/Dockerfile .
+      run: docker build -t prasanna002/nodejs --file ./UI/Dockerfile .
     - run: docker login -u ${{ secrets.DOCKER_USER }} 
              -p ${{ secrets.DOCKER_PASS }}
-    - run: docker push prasanna002/nodejs:$GITHUB_RUN_NUMBER
+    - run: docker push prasanna002/nodejs
+    - name: deploy  to ECS
+      run: chmod 777 deployment.sh
+    - run: ./deployment.sh
