@@ -1,7 +1,6 @@
 FROM node:12
-RUN mkdir UI
-COPY UI/* UI/
-RUN cd UI
-EXPOSE 8080
-EXPOSE 8083
 
+RUN mkdir -p /usr/local/app
+WORKDIR /usr/local/app
+COPY . .
+CMD ["npm", "start"]
