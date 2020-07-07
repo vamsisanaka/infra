@@ -25,10 +25,16 @@ jobs:
     - run: npm install --prefix ./UI
     - run: npm install -g webpack-dev-server --prefix ./UI 
     
-    - uses: actions/upload-artifact@v2
+    - name: Upload to S3
+      uses: jakejarvis/s3-sync-action@v0.5.0
       with:
-        name: buildnode-artifact
-        path: UI
+        args: --delete
+      env:
+        AWS_S3_BUCKET: functionbeat-deploy-2020today
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_REGION: 'ap-southeast-1'
+        SOURCE_DIR: 'UI'
     - run: ls 
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
