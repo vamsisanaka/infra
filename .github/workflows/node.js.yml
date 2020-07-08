@@ -21,7 +21,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-    
+    - run: yarn run --prefix ./UI
+    - run: yarn build --prefix ./UI    
     - name: Configure AWS credentials from Test account
       uses: aws-actions/configure-aws-credentials@v1
       with:
