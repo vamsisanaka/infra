@@ -21,11 +21,21 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 14.x
-   
-
+    
+    - name: Configure AWS credentials from Test account
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    
     
     - name: Build Docker container
       run: docker build -t prasanna002/nodejs --file ./UI/Dockerfile .
     - run: docker login -u ${{ secrets.DOCKER_USER }} 
              -p ${{ secrets.DOCKER_PASS }}
     - run: docker push prasanna002/nodejs
+      
+    - name: deploy  to ECS
+      run: chmod 777 ./UI/deployment.sh
+    - run: ./UI/deployment.sh
