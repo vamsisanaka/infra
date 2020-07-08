@@ -1,9 +1,5 @@
-FROM node:latest
+FROM nginx:latest
+WORKDIR /usr/share/nginx/html
+COPY UI/dist/* .
+EXPOSE 80
 
-RUN mkdir -p /usr/local/app
-WORKDIR /usr/local/app
-COPY UI .
-RUN chmod 774 /usr/local/app
-EXPOSE 8080
-RUN yarn install
-ENTRYPOINT ["yarn", "start"]
